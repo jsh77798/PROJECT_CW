@@ -131,6 +131,8 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 
 			if (0 >= HP)
 			{
+				//MyCharacter->KillCount += 1; // 몬스터를 처치하면 킬카운트를 올린다.
+
 				HP = 0;
 			}
 			else 

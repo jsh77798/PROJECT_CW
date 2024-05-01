@@ -68,6 +68,9 @@ public:
 	UPROPERTY(Category = "GlobalChracterValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float Key = 0;
 
+	UPROPERTY(Category = "GlobalChracterValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	int KillCount = 0;
+
 	// 나의 랜덤함수
 	int MyRandom(int A, int B) 
 	{

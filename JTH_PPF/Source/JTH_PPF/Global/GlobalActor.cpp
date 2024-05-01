@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Global/GlobalActor.h"
+#include "Global/GlobalCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGlobalActor::AGlobalActor()
@@ -22,6 +23,18 @@ void AGlobalActor::BeginPlay()
 void AGlobalActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+}
+
+bool AGlobalActor::OpenCheck() 
+{
+	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	// 킬카운트와 같다면 true 반환
+	if (MyCharacter->KillCount == 2)
+	{
+		return true;
+	}
+	return false;
 
 }
 
