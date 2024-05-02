@@ -41,6 +41,12 @@ public:
 	UPROPERTY(Category = "ATT", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FName GrobalAttDataName = "Data";
 
+	UPROPERTY(Category = "MyHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float MyHP = 5;
+
+	UPROPERTY(Category = "MyMaxHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float MyMAXHP = 5;
+
 	UPROPERTY(Category = "PlayerHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float PlayerHP = 0;
 

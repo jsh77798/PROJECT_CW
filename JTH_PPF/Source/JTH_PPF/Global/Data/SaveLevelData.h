@@ -18,6 +18,12 @@ struct JTH_PPF_API FSaveLevelData : public FTableRowBase
 	~FSaveLevelData() {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float S_HP = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float S_MAXHP = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float S_EXP = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")

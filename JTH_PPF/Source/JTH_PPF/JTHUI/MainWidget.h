@@ -22,6 +22,12 @@ public:
 	UTexture* SetCardIma();
 
 	UFUNCTION(BlueprintCallable)
+	float SetMyHP();
+
+	UFUNCTION(BlueprintCallable)
+	float SetMyMAXHP();
+
+	UFUNCTION(BlueprintCallable)
 	float SetMyCharacterHP();
 
 	UFUNCTION(BlueprintCallable)

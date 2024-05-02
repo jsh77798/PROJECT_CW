@@ -34,6 +34,8 @@ void AGlobalCharacter::BeginPlay()
 		{
 
 			AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+			MyCharacter->MyHP = SaveCurPlayerCharacterData->S_HP;
+			MyCharacter->MyMAXHP = SaveCurPlayerCharacterData->S_MAXHP;
 			MyCharacter->PlayerLEVELHP = SaveCurPlayerCharacterData->S_LEVELHP;
 			MyCharacter->UiPlayerLEVELHP = SaveCurPlayerCharacterData->S_UiLEVELHP;
 			MyCharacter->PlayerDAMAGE = SaveCurPlayerCharacterData->S_ATT;
@@ -78,6 +80,8 @@ void AGlobalCharacter::Tick(float DeltaTime)
 		{
 
 			AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+			SaveCurPlayerCharacterData->S_HP = MyCharacter->MyHP;
+			SaveCurPlayerCharacterData->S_MAXHP = MyCharacter->MyMAXHP;
 			SaveCurPlayerCharacterData->S_LEVELHP = MyCharacter->PlayerLEVELHP;
 			SaveCurPlayerCharacterData->S_UiLEVELHP = MyCharacter->UiPlayerLEVELHP;
 			SaveCurPlayerCharacterData->S_ATT = MyCharacter->PlayerDAMAGE;
@@ -169,19 +173,18 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 				MyCharacter->PlayerARMOR -= 1;
 				return;
 			}
-			
-			PlayerLEVELHP -= 3;
+			MyHP -= 3;
 			// 사운드 재생
 			/*  1  */
 			MyCharacter->SetPlaySound(true, 2);
 			/*  2  */
 			MyCharacter->SetPlaySound(true, 3);
 
-			if (0 >= PlayerLEVELHP)
+			if (0 >= MyHP)
 			{
-				PlayerLEVELHP = 0;
+				MyHP = 0;
 			}
-			LEVELHP = PlayerLEVELHP;
+			//LEVELHP = PlayerLEVELHP;
 			return;
 		}
 
@@ -195,19 +198,19 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 				return;
 			}
 
-			PlayerLEVELHP -= 1;
+			MyHP -= 1;
 			// 사운드 재생
 			/*  1  */
 			MyCharacter->SetPlaySound(true, 2);
 			/*  2  */
 			MyCharacter->SetPlaySound(true, 3);
 
-			if (0 >= PlayerLEVELHP)
+			if (0 >= MyHP)
 			{
-				PlayerLEVELHP = 0;
+				MyHP = 0;
 				// 0 밑으로 떨어지지 않게 고정
 			}
-			LEVELHP = PlayerLEVELHP;
+			//LEVELHP = PlayerLEVELHP;
 		}
 		
 	}

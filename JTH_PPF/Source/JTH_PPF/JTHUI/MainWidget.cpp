@@ -78,6 +78,20 @@ UTexture* UMainWidget::SetCardIma()
 	return Card;
 }
 
+float UMainWidget::SetMyHP()
+{
+	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	int _MyHP = MyCharacter->MyHP;
+	return _MyHP;
+}
+
+float UMainWidget::SetMyMAXHP()
+{
+	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	int _MyMAXHP = MyCharacter->MyMAXHP;
+	return _MyMAXHP;
+}
+
 float UMainWidget::SetMyCharacterHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
