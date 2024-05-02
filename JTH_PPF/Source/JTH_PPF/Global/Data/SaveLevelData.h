@@ -47,4 +47,10 @@ struct JTH_PPF_API FSaveLevelData : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float S_KEY = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int S_CharacterSpawn = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int S_DoorOpen = 0;
+
 };
