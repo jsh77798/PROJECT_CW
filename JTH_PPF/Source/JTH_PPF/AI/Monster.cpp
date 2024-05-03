@@ -146,7 +146,10 @@ void AMonster::Destroyed()
 
 	// 몬스터를 처치하면 킬카운트를 올린다.
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	MyCharacter->KillCount += 1;
+	if (MyCharacter != nullptr) 
+	{
+		MyCharacter->KillCount += 1;
+	}
 
 	if (nullptr == Inst)
 	{

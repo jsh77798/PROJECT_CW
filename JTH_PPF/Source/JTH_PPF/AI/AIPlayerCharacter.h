@@ -67,7 +67,7 @@ public:
 	class UAnimMontage* attackMontage;
 
 	UFUNCTION(BlueprintCallable)
-	void CHDamage(bool DamageCheck);
+	void CHDamage(bool BigDamageCheck, bool DamageCheck);
 
 	UFUNCTION(BlueprintCallable)
 	void Death();

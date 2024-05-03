@@ -403,17 +403,17 @@ void AAIPlayerCharacter::LookUpAtRate(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds() * CustomTimeDilation);
 }
 
-void AAIPlayerCharacter::CHDamage(bool DamageCheck)
+void AAIPlayerCharacter::CHDamage(bool BigDamageCheck, bool DamageCheck)
 {
-	if (DamageCheck == false)
+	if (DamageCheck == true)
 	{
 		SetAniState(AIAniState::Stun);
 	}
-	else 
+	if(BigDamageCheck == true)
 	{
 		SetAniState(AIAniState::Stun02);
 	}
-
+	return;
 }
 void AAIPlayerCharacter::Death()
 {

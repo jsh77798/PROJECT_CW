@@ -44,6 +44,9 @@ public:
 	UPROPERTY(Category = "MyHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float MyHP = 5;
 
+	UPROPERTY(Category = "MyHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float SaveMyHP = 5;
+
 	UPROPERTY(Category = "MyMaxHp", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float MyMAXHP = 5;
 
@@ -205,11 +208,12 @@ public:
 
 	class UAnimMontage* GetAnimMontage(int _Index)
 	{
+		
 		if (false == AllAnimations.Contains(_Index))
 		{
 			return nullptr;
 		}
-
+		
 		return AllAnimations[_Index];
 	}
 

@@ -35,6 +35,7 @@ void AGlobalCharacter::BeginPlay()
 
 			AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 			MyCharacter->MyHP = SaveCurPlayerCharacterData->S_HP;
+			MyCharacter->SaveMyHP = SaveCurPlayerCharacterData->S_SaveHP;
 			MyCharacter->MyMAXHP = SaveCurPlayerCharacterData->S_MAXHP;
 			MyCharacter->PlayerLEVELHP = SaveCurPlayerCharacterData->S_LEVELHP;
 			MyCharacter->UiPlayerLEVELHP = SaveCurPlayerCharacterData->S_UiLEVELHP;
@@ -81,6 +82,7 @@ void AGlobalCharacter::Tick(float DeltaTime)
 
 			AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 			SaveCurPlayerCharacterData->S_HP = MyCharacter->MyHP;
+			SaveCurPlayerCharacterData->S_SaveHP = MyCharacter->SaveMyHP;
 			SaveCurPlayerCharacterData->S_MAXHP = MyCharacter->MyMAXHP;
 			SaveCurPlayerCharacterData->S_LEVELHP = MyCharacter->PlayerLEVELHP;
 			SaveCurPlayerCharacterData->S_UiLEVELHP = MyCharacter->UiPlayerLEVELHP;
@@ -237,6 +239,21 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 		}
 		//PlayerHP = HP;
 		//LEVELHP = PlayerLEVELHP;
+	}
+
+	if (true == OtherComp->ComponentHasTag(TEXT("HP_Postion")))
+	{
+		//AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+		MyHP += 5;
+		// 사운드 재생
+		MyCharacter->SetPlaySound(true, 4);
+
+		if (MyHP >= MyMAXHP)
+		{
+			MyHP = MyMAXHP;
+		}
+
 	}
 
 	if (true == OtherComp->ComponentHasTag(TEXT("Key")))
