@@ -20,6 +20,12 @@ void AMonster::BeginPlay()
 {
 	UGlobalGameInstance* Inst = GetWorld()->GetGameInstance<UGlobalGameInstance>();
 
+	// 몬스터가 생성되면 몬스터카운트를 올린다.
+	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	if (MyCharacter != nullptr)
+	{
+		MyCharacter->MonsterCount += 1;
+	}
 	
 
 	if (nullptr != Inst)

@@ -32,7 +32,7 @@ bool AGlobalActor::OpenCheck()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	// 킬카운트와 같다면 true 반환
-	if (MyCharacter->KillCount == 2)
+	if (MyCharacter->KillCount >= MyCharacter->MonsterCount)
 	{
 		return true;
 	}

@@ -81,42 +81,66 @@ UTexture* UMainWidget::SetCardIma()
 float UMainWidget::SetMyHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _MyHP = MyCharacter->MyHP;
+	int _MyHP = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_MyHP = MyCharacter->MyHP;
+	}
 	return _MyHP;
 }
 
 float UMainWidget::SetMyMAXHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _MyMAXHP = MyCharacter->MyMAXHP;
+	int _MyMAXHP = 0;
+	if (MyCharacter != nullptr)
+	{
+		_MyMAXHP = MyCharacter->MyMAXHP;
+	}
 	return _MyMAXHP;
 }
 
 float UMainWidget::SetMyCharacterHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _HP = MyCharacter->PlayerHP;
+	int _HP = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_HP = MyCharacter->PlayerHP;
+	}
 	return _HP;
 }
 
 float UMainWidget::SetMyCharacterMAXHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _MAXHP = MyCharacter->PlayerMAXHP;
+	int _MAXHP = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_MAXHP = MyCharacter->PlayerMAXHP;
+	}
 	return _MAXHP;
 }
 
 float UMainWidget::SetMyCharacterLEVELHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _LEVELHP = MyCharacter->PlayerLEVELHP;
+	int _LEVELHP = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_LEVELHP = MyCharacter->PlayerLEVELHP;
+	}
 	return _LEVELHP;
 }
 
 float UMainWidget::GetMyCharacterSaveLEVELHP()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _SaveLEVELHP = MyCharacter->UiPlayerLEVELHP;
+	int _SaveLEVELHP = 0;
+	if (MyCharacter != nullptr)
+	{
+		_SaveLEVELHP = MyCharacter->UiPlayerLEVELHP;
+	}
 	return _SaveLEVELHP;
 }
 
@@ -129,7 +153,11 @@ void UMainWidget::SetMyCharacterSaveLEVELHP()
 float UMainWidget::SetMyCharacterDAMAGE()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _DAMAGE = MyCharacter->PlayerDAMAGE;
+	int _DAMAGE = 0; 
+	if (MyCharacter != nullptr) 
+	{
+		_DAMAGE = MyCharacter->PlayerDAMAGE;
+	}
 	return _DAMAGE;
 }
 
@@ -143,7 +171,11 @@ void UMainWidget::SetDAMAGE(int DamageUp)
 float UMainWidget::SetMyCharacterARMOR()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _ARMOR = MyCharacter->PlayerARMOR;
+	int _ARMOR = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_ARMOR = MyCharacter->PlayerARMOR;
+	}
 	return _ARMOR;
 }
 
@@ -168,7 +200,11 @@ void UMainWidget::SetSTUN_DAMAGE(int STUN_DAMAGEUp)
 float UMainWidget::SetMyCharacterKey()
 {
 	AGlobalCharacter* MyCharacter = Cast<AGlobalCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	int _Key = MyCharacter->Key;
+	int _Key = 0;
+	if (MyCharacter != nullptr) 
+	{
+		_Key = MyCharacter->Key;
+	}
 	return _Key;
 }
 
