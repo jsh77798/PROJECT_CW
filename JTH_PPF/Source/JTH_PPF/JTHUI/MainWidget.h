@@ -8,6 +8,7 @@
 //#include "Global/GlobalCharacter.h"
 #include "MainWidget.generated.h"
 
+class AMonster;
 /**
  * 
  */
@@ -63,6 +64,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float SetMyCharacterKey();
 
+	// 월드에 이미 존재하는 보스를 찾아 연결
+	UFUNCTION(BlueprintCallable)
+	void FindBossCharacter();
+
+	// 나중에 생성되는 보스를 직접 연결할 때 사용
+	UFUNCTION(BlueprintCallable)
+	void SetBossCharacter(AMonster* InBoss);
+
+	UFUNCTION(BlueprintCallable)
+	float SetBossHP();
+
+	UFUNCTION(BlueprintCallable)
+	float SetBossMAXHP();
+
 	/*
 	UFUNCTION(BlueprintCallable)
 	bool TripleCardCheck(UTexture Card1, UTexture Card2, UTexture Card3);
@@ -110,6 +125,11 @@ public:
 	void SetTripleCardOnOffSwitch()
 	{
 		TripleCardOnOff = TripleCardOnOff == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden;
+	}
+
+	void SetBossHPOnOffSwitch()
+	{
+		BossHPOnOff = BossHPOnOff == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden;
 	}
 	
 
@@ -159,6 +179,9 @@ private:
 	UPROPERTY(Category = "UIOnOff", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	ESlateVisibility TripleCardOnOff = ESlateVisibility::Hidden;
 
+	UPROPERTY(Category = "UIOnOff", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	ESlateVisibility BossHPOnOff = ESlateVisibility::Hidden;
+
 
 	class UInventoryUserWidget* Inven;
 
@@ -171,6 +194,13 @@ private:
 
 	UPROPERTY(Category = "CharacterHPM", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float PlayLEVELHP = 0;
+
+	UPROPERTY()
+	AMonster* BossCharacter = nullptr;
+
+	UPROPERTY(Category = "CharacterHPM", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float BossHP = 0;
+
     /*
 	class AAIPlayerCharacter* AIPlayerCharacter = nullptr;*/
 	

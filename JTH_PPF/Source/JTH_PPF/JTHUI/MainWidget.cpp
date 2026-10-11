@@ -3,6 +3,7 @@
 
 #include "JTHUI/MainWidget.h"
 #include <Global/GlobalCharacter.h>
+#include <AI/Monster.h>
 #include <Global/GlobalGameInstance.h>
 #include <Global/Data/UpgradeCardData.h>
 #include "Engine/Texture.h"
@@ -21,7 +22,7 @@ void UMainWidget::NativeConstruct()
 	AllWidGet.Add(Cast<UUserWidget>(GetWidgetFromName(TEXT("WBP_Option"))));
 	//AllWidGet.Add(Cast<UUserWidget>(GetWidgetFromName(TEXT("WBP_Status"))));
 
-	
+	FindBossCharacter();
 }
 
 
@@ -29,12 +30,10 @@ void UMainWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 	
-
-
-	// //PlayerHPe();
-	// 기본적인 이동이나 이런 시스템자체가 다르다는것을 기억해야 한다.
-	// Inven->SetPositionInViewport({100, 100});
-	// Inven->SetAnchorsInViewport();
+	if (!IsValid(BossCharacter) || BossCharacter->GetHP() <= 0.f)
+	{
+		BossHPOnOff = ESlateVisibility::Hidden;
+	}
 }
 
 // 여기서 리턴하는 bool 값은 지금 상태가 바뀌었다는 AllHidden이 바뀌었다는것을 체크하는 bool 값이 된다.
@@ -206,6 +205,72 @@ float UMainWidget::SetMyCharacterKey()
 		_Key = MyCharacter->Key;
 	}
 	return _Key;
+}
+
+void UMainWidget::FindBossCharacter()
+{
+	BossCharacter = nullptr;
+
+	TArray<AActor*> Monsters;
+
+	UGameplayStatics::GetAllActorsOfClass(
+		GetWorld(),
+		AMonster::StaticClass(),
+		Monsters
+	);
+
+	for (AActor* Actor : Monsters)
+	{
+		AMonster* Monster = Cast<AMonster>(Actor);
+
+		if (!IsValid(Monster))
+		{
+			continue;
+		}
+
+		// DataName이 "Boss"인 몬스터만 반환하는 기존 함수
+		AMonster* Boss = Monster->GetBossCharacter();
+
+		if (IsValid(Boss))
+		{
+			BossCharacter = Boss;
+			BossHPOnOff = IsValid(BossCharacter)
+				? ESlateVisibility::Visible
+				: ESlateVisibility::Hidden;
+			break;
+		}
+	}
+}
+
+void UMainWidget::SetBossCharacter(AMonster* InBoss)
+{
+	BossCharacter = IsValid(InBoss)
+		? InBoss->GetBossCharacter()
+		: nullptr;
+
+	BossHPOnOff = IsValid(BossCharacter)
+		? ESlateVisibility::Visible
+		: ESlateVisibility::Hidden;
+}
+
+float UMainWidget::SetBossHP()
+{
+	if (!IsValid(BossCharacter))
+	{
+		return 0.f;
+	}
+
+	return BossCharacter->GetHP();
+}
+
+float UMainWidget::SetBossMAXHP()
+{
+	if (!IsValid(BossCharacter))
+	{
+		return 0.f;
+	}
+
+	return BossCharacter->GetMAXHP();
 }
 
 /*

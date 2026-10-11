@@ -28,13 +28,40 @@ void AMonster::BeginPlay()
 	}
 	
 
-	if (nullptr != Inst)
-	{
-		CurMonsterData = Inst->GetMonsterData(DataName);
 
-		SetAllAnimation(CurMonsterData->MapAnimation);
-		SetAniState(AIState::DEATH);
+	if (!IsValid(Inst))
+	{
+		UE_LOG(
+			LogTemp, Error,
+			TEXT("Monster: GlobalGameInstance가 없습니다. Actor=%s"),
+			*GetName()
+		);
+		return;
 	}
+
+	CurMonsterData = Inst->GetMonsterData(DataName);
+
+	if (CurMonsterData == nullptr)
+	{
+		UE_LOG(
+			LogTemp, Error,
+			TEXT("Monster: 데이터 조회 실패. Actor=%s, DataName=%s"),
+			*GetName(),
+			*DataName.ToString()
+		);
+		return;
+	}
+
+	SetAllAnimation(CurMonsterData->MapAnimation);
+	SetAniState(AIState::DEATH);
+
+	//if (nullptr != Inst)
+	//{
+	//	CurMonsterData = Inst->GetMonsterData(DataName);
+	//
+	//	SetAllAnimation(CurMonsterData->MapAnimation);
+	//	SetAniState(AIState::DEATH);
+	//}
 	MonsterATT = CurMonsterData->ATT;
 	MonsterHP = CurMonsterData->HP;
 	MonsterMAXHP = CurMonsterData->MAXHP;
@@ -164,7 +191,20 @@ void AMonster::Destroyed()
 
 	TSubclassOf<UObject> Item = Inst->GetSubClass(TEXT("Item"));
 
-	for (size_t i = 0; i < 1; i++)
+	int ItemCount = 1;
+	if (DataName.ToString() == "Boss") {
+		ItemCount = 7;
+	}
+
+	if (DataName.ToString() == "Monster02") {
+		ItemCount = 2;
+	}
+
+	if (DataName.ToString() == "Monster03") {
+		ItemCount = 3;
+	}
+
+	for (size_t i = 0; i < ItemCount; i++)
 	{
 		FVector RandomPos;
 

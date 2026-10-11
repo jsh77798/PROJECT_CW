@@ -36,6 +36,16 @@ public:
 
 	void Destroyed() override;
 
+	AMonster* GetBossCharacter()
+	{
+		if ("Boss" == DataName.ToString())
+		{
+			return this;
+		}
+		
+		return nullptr;
+	}
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void SetCollision(bool _MonsterAttCollision);
