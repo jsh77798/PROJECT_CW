@@ -190,6 +190,7 @@ void AMonster::Destroyed()
 	}
 
 	TSubclassOf<UObject> Item = Inst->GetSubClass(TEXT("Item"));
+	TSubclassOf<UObject> keyItem = Inst->GetSubClass(TEXT("key"));
 
 	int ItemCount = 1;
 	if (DataName.ToString() == "Boss") {
@@ -218,6 +219,22 @@ void AMonster::Destroyed()
 			// 그냥 내가 죽을때 어떤 액터를 만들뿐이다.
 			Actor->Tags.Add(TEXT("Item"));
 			Actor->SetActorLocation(GetActorLocation() + RandomPos);
+		}
+
+	}
+
+	if (DataName.ToString() == "Monster03") 
+	{
+		FVector RandomPos;
+
+		RandomPos.X = UARGlobal::MainRandom.FRandRange(-100, 100);
+		RandomPos.Y = UARGlobal::MainRandom.FRandRange(-100, 100);
+
+		AActor* KeyActor = GetWorld()->SpawnActor<AActor>(keyItem);
+		if (KeyActor != nullptr)
+		{
+			KeyActor->Tags.Add(TEXT("Key"));
+			KeyActor->SetActorLocation(GetActorLocation() + RandomPos);
 		}
 	}
 
